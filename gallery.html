@@ -1213,45 +1213,7 @@ addEventListener('resize',frame);frame();
 })();
 })();
 </script>
-<!-- SkyDeck promo pop-up: shows once per visit until the night is over -->
-<div class="sdp" id="sdp" role="dialog" aria-modal="false" aria-labelledby="sdp-t" hidden>
-  <button class="sdp-x" type="button" aria-label="Close">&times;</button>
-  <a class="sdp-art" href="skydeck.html?utm_source=site&amp;utm_medium=popup&amp;utm_campaign=sherlock_night"><img src="assets/img/events/skydeck-nov-21-sm.webp" alt="Poster for Sherlock Night with DJ Tousif at SkyDeck, Sat 21 Nov" width="540" height="720" decoding="async"></a>
-  <div class="sdp-b">
-    <p class="sdp-l">SkyDeck &middot; MG Road</p>
-    <p class="sdp-t" id="sdp-t">Sherlock Night</p>
-    <p class="sdp-m">Sat 21 Nov &middot; 8 PM onwards<br>DJ Tousif</p>
-    <a class="sdp-cta" href="skydeck.html?utm_source=site&amp;utm_medium=popup&amp;utm_campaign=sherlock_night">Get on the list</a>
-  </div>
-</div>
-<style>
-.sdp{position:fixed;z-index:90;right:clamp(12px,3vw,32px);bottom:clamp(12px,3vw,32px);width:min(360px,calc(100vw - 24px));display:grid;grid-template-columns:118px 1fr;gap:16px;align-items:center;padding:14px 16px 14px 14px;background:rgba(10,8,6,.96);border:1px solid rgba(212,175,55,.45);box-shadow:0 24px 60px rgba(0,0,0,.6);color:#fff;font-family:inherit;opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease}
-.sdp.on{opacity:1;transform:none}
-.sdp[hidden]{display:none}
-.sdp-art{display:block;aspect-ratio:3/4;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
-.sdp-art img{width:100%;height:100%;object-fit:cover;display:block}
-.sdp-b{display:grid;gap:6px;min-width:0}
-.sdp-l{margin:0;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#d4af37}
-.sdp-t{margin:0;font-family:var(--serif,Georgia,serif);font-size:1.45rem;line-height:1.1}
-.sdp-m{margin:0;font-size:.78rem;color:rgba(255,255,255,.75)}
-.sdp-cta{margin-top:6px;justify-self:start;padding:.65rem .9rem;background:#d4af37;color:#0a0806;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;text-decoration:none}
-.sdp-cta:hover{background:#e6c458}
-.sdp-x{position:absolute;top:2px;right:6px;width:32px;height:32px;border:0;background:none;color:rgba(255,255,255,.7);font-size:1.4rem;line-height:1;cursor:pointer}
-.sdp-x:hover{color:#fff}
-@media (max-width:520px){.sdp{bottom:84px;grid-template-columns:96px 1fr}}
-@media (prefers-reduced-motion:reduce){.sdp{transition:none}}
-</style>
-<script>
-(function(){
-  var END=new Date('2026-11-22T02:00:00+05:30'),K='sidd-sdp-seen',p=document.getElementById('sdp');
-  if(!p||new Date()>END)return;
-  try{if(sessionStorage.getItem(K))return}catch(e){}
-  function close(){p.classList.remove('on');setTimeout(function(){p.hidden=true},450);try{sessionStorage.setItem(K,'1')}catch(e){}}
-  p.querySelector('.sdp-x').addEventListener('click',close);
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!p.hidden)close()});
-  Array.prototype.forEach.call(p.querySelectorAll('a'),function(a){a.addEventListener('click',function(){try{sessionStorage.setItem(K,'1')}catch(e){}})});
-  setTimeout(function(){p.hidden=false;requestAnimationFrame(function(){p.classList.add('on')})},2500);
-})();
-</script>
+<!-- Next-event pop-up: always promotes the next upcoming night from events.html -->
+<script src="assets/js/popup.js" defer></script>
 </body>
 </html>
