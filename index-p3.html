@@ -810,8 +810,15 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
 .hr-frame.is-paused .hr-play{width:56px;height:56px;right:50%;bottom:50%;transform:translate(50%,50%);border-color:var(--gold);color:var(--gold)}
 @media (max-width:640px){.hr-row{grid-auto-columns:46vw}.hr-nav{display:none}}
 </style>
+<style>/* preview p3 */
+.hreels.fx{padding-top:0}
+.hr-zoom{position:relative;height:220vh}
+.hr-stage{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:clip}
+.hr-stage .hr-card{width:calc(88vh * 9 / 16);max-width:86vw;will-change:transform}
+.hr-stage .hr-frame{transition:border-radius .2s}
+</style>
 </head>
-<!-- PREVIEW: v2 no reel strip, reels only in the gallery (not linked from the site) -->
+<!-- PREVIEW p3: Zoom in on scroll (not linked from the site) -->
 <body>
 <a class="skip" href="#services">Skip to content</a>
 
@@ -883,6 +890,13 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
     <div class="hero-rise" style="--d:.75s"><a class="hero-next" id="heroNext" href="events.html" hidden><span class="hn-dot" aria-hidden="true"></span><span class="hn-txt"><span class="hn-k">Next up</span><span class="hn-t">Upcoming night</span><span class="hn-c"></span></span><span class="hn-go">Get on the list</span></a></div>
   </div>
   <a class="scroll-cue" href="#services" aria-label="Scroll to services"></a>
+</section>
+
+<section class="hreels" id="hreels" aria-label="Reels">
+    <div class="wrap">
+      <div class="hr-top"><p class="label">Reels from the floor</p><div class="hr-nav"><button type="button" class="hr-arr" data-dir="-1" aria-label="Previous reels">&larr;</button><button type="button" class="hr-arr" data-dir="1" aria-label="More reels">&rarr;</button></div></div>
+      <div class="hr-row" tabindex="0" aria-label="Reels"><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/a-capro-22-feb-sat.mp4" poster="assets/video/gallery/a-capro-22-feb-sat.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 1"></video><button class="hr-play" type="button" aria-label="Play reel 1"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/a-spidy-15th.mp4" poster="assets/video/gallery/a-spidy-15th.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 2"></video><button class="hr-play" type="button" aria-label="Play reel 2"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/b-hod-info-cut-1.mp4" poster="assets/video/gallery/b-hod-info-cut-1.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 3"></video><button class="hr-play" type="button" aria-label="Play reel 3"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/b-new-year-cut.mp4" poster="assets/video/gallery/b-new-year-cut.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 4"></video><button class="hr-play" type="button" aria-label="Play reel 4"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/b-shor-bazaar-video.mp4" poster="assets/video/gallery/b-shor-bazaar-video.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 5"></video><button class="hr-play" type="button" aria-label="Play reel 5"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/c-8th-feb-reel-divss.mp4" poster="assets/video/gallery/c-8th-feb-reel-divss.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 6"></video><button class="hr-play" type="button" aria-label="Play reel 6"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/c-mask-2-stry.mp4" poster="assets/video/gallery/c-mask-2-stry.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 7"></video><button class="hr-play" type="button" aria-label="Play reel 7"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/c-sket-feb-1.mp4" poster="assets/video/gallery/c-sket-feb-1.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 8"></video><button class="hr-play" type="button" aria-label="Play reel 8"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/d-march-17th-sundowner.mp4" poster="assets/video/gallery/d-march-17th-sundowner.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 9"></video><button class="hr-play" type="button" aria-label="Play reel 9"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/d-sundowner-pra-pra-17th.mp4" poster="assets/video/gallery/d-sundowner-pra-pra-17th.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 10"></video><button class="hr-play" type="button" aria-label="Play reel 10"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/e-19th-spidy-reel.mp4" poster="assets/video/gallery/e-19th-spidy-reel.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 11"></video><button class="hr-play" type="button" aria-label="Play reel 11"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div><div class="hr-card"><div class="hr-frame is-paused"><video data-src="assets/video/gallery/f-rohith-reel-bike.mp4" poster="assets/video/gallery/f-rohith-reel-bike.webp" muted loop playsinline preload="none" width="540" height="960" aria-label="Reel 12"></video><button class="hr-play" type="button" aria-label="Play reel 12"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5.5v13l11-6.5z"/><path class="i-pause" d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg></button><button class="hr-snd" type="button" aria-pressed="false" aria-label="Turn sound on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path class="i-on" d="M15 9.2a4 4 0 0 1 0 5.6M17.3 7a7 7 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="1.4"/><path class="i-off" d="M15.5 9.5l5 5M20.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button></div></div></div>
+    </div>
 </section>
 
 <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Corporate Parties</span><span>Award Nights</span><span>Club Nights</span><span>Team Offsites</span><span>Themed Celebrations</span><span>Rooftop Sundowners</span><span>Guest Lists</span><span>Live DJs</span><span>Corporate Parties</span><span>Award Nights</span><span>Club Nights</span><span>Team Offsites</span><span>Themed Celebrations</span><span>Rooftop Sundowners</span><span>Guest Lists</span><span>Live DJs</span></div></div>
@@ -2354,7 +2368,53 @@ hero();reveals();counters();venues();lightbox();moreGallery();book();enquiry();d
 <!-- Next-event pop-up: always promotes the next upcoming night from events.html -->
 <script src="assets/js/home-live.js" defer></script>
 <script src="assets/js/popup.js" defer></script>
+<script>
+/* home reel strip: autoplay muted when in view, one sound at a time */
+(function(){
+  var box=document.getElementById('hreels');if(!box)return;
+  var row=box.querySelector('.hr-row'),cards=[].slice.call(box.querySelectorAll('.hr-card'));
+  var auto=!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+  [].forEach.call(box.querySelectorAll('.hr-arr'),function(b){b.addEventListener('click',function(){row.scrollBy({left:+b.getAttribute('data-dir')*row.clientWidth*.8,behavior:'smooth'})})});
+  function quiet(c){var v=c.querySelector('video'),s=c.querySelector('.hr-snd');v.muted=true;s.setAttribute('aria-pressed','false');s.setAttribute('aria-label','Turn sound on')}
+  cards.forEach(function(card,i){
+    var v=card.querySelector('video'),fr=card.querySelector('.hr-frame'),btn=card.querySelector('.hr-play'),snd=card.querySelector('.hr-snd'),loaded=false,manual=false;
+    function play(){if(!loaded){loaded=true;v.src=v.getAttribute('data-src')}var q=v.play();if(q&&q.catch)q.catch(sync)}
+    function sync(){var p=!v.paused&&!v.ended;fr.classList.toggle('is-paused',!p);btn.setAttribute('aria-label',(p?'Pause':'Play')+' reel '+(i+1))}
+    v.addEventListener('play',sync);v.addEventListener('pause',sync);v.addEventListener('playing',sync);
+    btn.addEventListener('click',function(){if(v.paused){manual=false;play()}else{manual=true;v.pause()}});
+    snd.addEventListener('click',function(){var on=v.muted;if(on)cards.forEach(function(c){if(c!==card)quiet(c)});v.muted=!on;snd.setAttribute('aria-pressed',on?'true':'false');snd.setAttribute('aria-label',on?'Turn sound off':'Turn sound on');if(on&&v.paused)play()});
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(en){en.forEach(function(x){
+        if(x.isIntersecting&&x.intersectionRatio>=.6){if(auto&&!manual)play()}
+        else if(!v.paused){v.pause();quiet(card)}
+      })},{threshold:[0,.6]}).observe(card);
+    }
+  });
+})();
+</script>
 
+<script>
+/* PREVIEW p3: Zoom in on scroll */
+(function(){
+  var box=document.getElementById('hreels');if(!box)return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var row=box.querySelector('.hr-row'),cards=[].slice.call(box.querySelectorAll('.hr-card'));
+  function clamp(x){return x<0?0:x>1?1:x}
+  function vh(){return window.innerHeight||800}
+  var raf=0;function kick(){if(!raf)raf=requestAnimationFrame(function(){raf=0;draw()})}
+  window.addEventListener('scroll',kick,{passive:true});window.addEventListener('resize',function(){layout();kick()},{passive:true});
 
+  box.classList.add('fx');
+  var zoom=document.createElement('div');zoom.className='hr-zoom';
+  var stage=document.createElement('div');stage.className='hr-stage';zoom.appendChild(stage);
+  box.insertBefore(zoom,box.firstChild);
+  var feat=cards[0];stage.appendChild(feat);
+  var fr=feat.querySelector('.hr-frame');
+  function layout(){}
+  function draw(){var r=zoom.getBoundingClientRect(),span=r.height-vh(),p=span>0?clamp(-r.top/span/.75):0;
+    var sc=.42+.58*p;feat.style.transform='scale('+sc+')';fr.style.borderRadius=(28*(1-p))+'px'}
+  draw();
+})();
+</script>
 </body>
 </html>

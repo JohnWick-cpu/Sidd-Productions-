@@ -810,8 +810,16 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
 .hr-frame.is-paused .hr-play{width:56px;height:56px;right:50%;bottom:50%;transform:translate(50%,50%);border-color:var(--gold);color:var(--gold)}
 @media (max-width:640px){.hr-row{grid-auto-columns:46vw}.hr-nav{display:none}}
 </style>
+<style>/* preview p4 */
+.hreels.fx{padding:0;overflow:clip}
+.hreels.fx .hr-nav{display:none}
+.hr-stack{position:relative}
+.hr-deck{position:sticky;top:0;height:100vh;overflow:clip}
+.hr-deck .hr-card{position:absolute;left:50%;top:50%;width:calc(78vh * 9 / 16);max-width:78vw;margin:0;will-change:transform;box-shadow:0 30px 70px rgba(0,0,0,.7)}
+.hr-deck .hr-label{position:absolute;left:clamp(1rem,4vw,3rem);top:clamp(5rem,12vh,7rem);z-index:20}
+</style>
 </head>
-<!-- PREVIEW: v1 reels slide by on their own (not linked from the site) -->
+<!-- PREVIEW p4: Stacked cards (not linked from the site) -->
 <body>
 <a class="skip" href="#services">Skip to content</a>
 
@@ -2385,32 +2393,36 @@ hero();reveals();counters();venues();lightbox();moreGallery();book();enquiry();d
   });
 })();
 </script>
+
 <script>
-/* PREVIEW v1: home reel strip glides sideways on its own, like the venue logo band.
-   Pauses while the visitor hovers, touches, drags or uses the arrows; off for reduced motion. */
+/* PREVIEW p4: Stacked cards */
 (function(){
   var box=document.getElementById('hreels');if(!box)return;
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  var row=box.querySelector('.hr-row');if(!row)return;
-  box.classList.add('hr-linked');
-  var dir=1,speed=.45,pos=null,hold=0,hover=false,inView=false,last=0;
-  function manual(){hold=Date.now()+4000;pos=null}
-  row.addEventListener('mouseenter',function(){hover=true});row.addEventListener('mouseleave',function(){hover=false});
-  ['pointerdown','touchstart','keydown','focusin'].forEach(function(t){row.addEventListener(t,manual,{passive:true})});
-  row.addEventListener('wheel',function(e){if(Math.abs(e.deltaX)>Math.abs(e.deltaY))manual()},{passive:true});
-  [].forEach.call(box.querySelectorAll('.hr-arr'),function(b){b.addEventListener('click',manual)});
-  if('IntersectionObserver' in window)new IntersectionObserver(function(e){inView=e[0].isIntersecting}).observe(box);else inView=true;
-  function frame(t){
-    var dt=last?Math.min(50,t-last):16;last=t;
-    if(inView&&!hover&&!document.hidden&&Date.now()>=hold){
-      var max=row.scrollWidth-row.clientWidth;
-      if(max>0){if(pos===null)pos=row.scrollLeft;pos+=dir*speed*dt/16;
-        if(pos>=max){pos=max;dir=-1}else if(pos<=0){pos=0;dir=1}
-        row.scrollLeft=pos}
-    }
-    requestAnimationFrame(frame);
+  var row=box.querySelector('.hr-row'),cards=[].slice.call(box.querySelectorAll('.hr-card'));
+  function clamp(x){return x<0?0:x>1?1:x}
+  function vh(){return window.innerHeight||800}
+  var raf=0;function kick(){if(!raf)raf=requestAnimationFrame(function(){raf=0;draw()})}
+  window.addEventListener('scroll',kick,{passive:true});window.addEventListener('resize',function(){layout();kick()},{passive:true});
+
+  box.classList.add('fx');
+  var stack=document.createElement('div');stack.className='hr-stack';
+  var deck=document.createElement('div');deck.className='hr-deck';stack.appendChild(deck);
+  var lab=box.querySelector('.hr-top .label');if(lab){var l=lab.cloneNode(true);l.classList.add('hr-label');deck.appendChild(l)}
+  box.insertBefore(stack,box.firstChild);row.style.display='none';var top0=box.querySelector('.hr-top');if(top0)top0.style.display='none';
+  cards.forEach(function(c,i){c.style.zIndex=i+1;deck.appendChild(c)});
+  var n=cards.length,topI=-1;
+  function layout(){stack.style.height=(vh()*(1+.55*(n-1)))+'px'}
+  function ensure(c,on){var v=c.querySelector('video');if(on){if(!v.src)v.src=v.getAttribute('data-src');if(v.paused)v.play().catch(function(){})}else if(!v.paused)v.pause()}
+  function draw(){var r=stack.getBoundingClientRect(),span=r.height-vh(),p=span>0?clamp(-r.top/span):0,f=p*(n-1);
+    var t=Math.min(n-1,Math.round(f));
+    cards.forEach(function(c,i){var d=i-f;var y=d>0?d*105:0;var off=Math.max(0,Math.min(3,f-i))*-10;
+      var rot=(i%2?1.6:-1.6)*Math.min(1,Math.max(0,f-i));
+      c.style.transform='translate3d(-50%,calc(-50% + '+(y>0?y+'vh':off+'px')+'),0) rotate('+rot+'deg)';
+      c.style.visibility=(i<t-2)?'hidden':'visible'});
+    if(t!==topI&&r.top<vh()&&r.bottom>0){topI=t;cards.forEach(function(c,i){ensure(c,i===t)})}
   }
-  requestAnimationFrame(frame);
+  layout();draw();
 })();
 </script>
 </body>
