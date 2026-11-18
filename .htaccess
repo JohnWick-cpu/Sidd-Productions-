@@ -33,3 +33,10 @@ RewriteRule ^ https://siddproductions.com%{REQUEST_URI} [L,R=301]
 </IfModule>
 
 DirectoryIndex index.html
+
+# Let listing portals pull event card images directly
+<IfModule mod_headers.c>
+  <FilesMatch "^district-.*\.jpg$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
