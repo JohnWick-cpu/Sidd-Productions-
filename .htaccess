@@ -9,10 +9,6 @@ RewriteRule ^ https://siddproductions.com%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\.siddproductions\.com$ [NC]
 RewriteRule ^ https://siddproductions.com%{REQUEST_URI} [L,R=301]
 
-# Links already shared on social, in Meta ad drafts and on District (kept after the 18 Nov rollback)
-RewriteRule ^sherlock/?$ https://siddproductions.com/events.html?only=skydeck&utm_source=social&utm_medium=organic&utm_campaign=sherlock_night [L,R=302,NE]
-RewriteRule ^skydeck-night/?$ https://siddproductions.com/events.html?only=skydeck&utm_source=social&utm_medium=organic&utm_campaign=sherlock_night [L,R=302,NE]
-
 # 2. Compression
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json application/ld+json image/svg+xml text/xml
@@ -37,3 +33,16 @@ RewriteRule ^skydeck-night/?$ https://siddproductions.com/events.html?only=skyde
 </IfModule>
 
 DirectoryIndex index.html
+
+# The guest list page is now the Events page
+RewriteRule ^guestlist\.html$ https://siddproductions.com/events.html [L,R=301]
+# Short event links for social posts (temporary redirects, change per event)
+RewriteRule ^sherlock/?$ https://siddproductions.com/events.html?only=skydeck&utm_source=social&utm_medium=organic&utm_campaign=sherlock_night [L,R=302,NE]
+RewriteRule ^skydeck-night/?$ https://siddproductions.com/events.html?only=skydeck&utm_source=social&utm_medium=organic&utm_campaign=sherlock_night [L,R=302,NE]
+
+# Let listing portals pull event card images directly
+<IfModule mod_headers.c>
+  <FilesMatch "^district-.*\.jpg$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
