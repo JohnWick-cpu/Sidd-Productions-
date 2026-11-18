@@ -786,7 +786,6 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
 }
 </style>
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="assets/css/home-live.css">
 </head>
 <body>
 <a class="skip" href="#services">Skip to content</a>
@@ -813,7 +812,7 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
   <nav class="nav-links" aria-label="Primary">
     <a href="#services">Services</a>
     <a href="packages.html">Packages</a>
-    <a href="events.html">Events</a>
+    <a href="guestlist.html">Guest List</a>
     <a href="#about">About</a>
     <a href="#venues">Venues</a>
     <a href="#gallery">Gallery</a>
@@ -828,7 +827,7 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
 <div class="menu" id="menu">
   <a href="#services">Services</a>
   <a href="packages.html">Packages</a>
-    <a href="events.html">Events</a>
+    <a href="guestlist.html">Guest List</a>
   <a href="#about">About</a>
   <a href="#venues">Venues</a>
   <a href="#gallery">Gallery</a>
@@ -849,28 +848,13 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
     <video id="heroVideo" muted loop playsinline preload="metadata" aria-hidden="true" hidden></video>
   </div>
   <div class="hero-shade"></div>
-  <div class="hero-beams" aria-hidden="true"><i></i><i></i><i></i></div>
-  <canvas class="hero-fx" id="heroFx" aria-hidden="true"></canvas>
   <div class="hero-inner" id="heroInner">
     <p class="label hero-rise" style="--d:0s">Corporate Events &middot; Nightlife</p>
     <h1 class="hero-rise" style="--d:.15s">Luxury, Lights<br class="br-d"> and <em>Legendary</em> Nights</h1>
     <p class="sub hero-rise" style="--d:.35s">Bengaluru&rsquo;s premium corporate party specialists</p>
     <a class="btn hero-rise" style="--d:.55s" href="#book">Enquire</a>
-    <div class="hero-rise" style="--d:.75s"><a class="hero-next" id="heroNext" href="events.html" hidden><span class="hn-dot" aria-hidden="true"></span><span class="hn-txt"><span class="hn-k">Next up</span><span class="hn-t">Upcoming night</span><span class="hn-c"></span></span><span class="hn-go">Get on the list</span></a></div>
   </div>
   <a class="scroll-cue" href="#services" aria-label="Scroll to services"></a>
-</section>
-
-<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Corporate Parties</span><span>Award Nights</span><span>Club Nights</span><span>Team Offsites</span><span>Themed Celebrations</span><span>Rooftop Sundowners</span><span>Guest Lists</span><span>Live DJs</span><span>Corporate Parties</span><span>Award Nights</span><span>Club Nights</span><span>Team Offsites</span><span>Themed Celebrations</span><span>Rooftop Sundowners</span><span>Guest Lists</span><span>Live DJs</span></div></div>
-
-<section class="wk" id="thisweek" aria-labelledby="wk-h" hidden>
-  <div class="wrap">
-    <div class="wk-head">
-      <div><p class="label label--drop">On this week</p><h2 id="wk-h">The next <em>nights</em> out.</h2><p class="lede">Pick a night, tap the poster and get on the guest list in a minute. We confirm every entry on WhatsApp.</p></div>
-      <a class="btn" href="events.html">See all events</a>
-    </div>
-    <div class="wk-row" id="wkRow"></div>
-  </div>
 </section>
 
 <!-- ============ SERVICES ============ -->
@@ -882,7 +866,7 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
   </div>
 
   <article class="panel">
-    <div class="photo parallax" data-key="service-1"><img class="px" src="assets/img/service-1.webp" srcset="assets/img/service-1-sm.webp 1600w, assets/img/service-1.webp 3200w" sizes="(max-width: 860px) 300vw, 120vw" alt="Colleagues raising a toast at a long table in a gold-lit Bengaluru lounge" width="3200" height="1835" loading="lazy" decoding="async" style="object-position:50% 40%"></div>
+    <div class="photo parallax" data-key="service-1"><img class="px" src="assets/img/service-1.webp" srcset="assets/img/service-1-sm.webp 1600w, assets/img/service-1.webp 3200w" sizes="(max-width: 860px) 300vw, 120vw" alt="Smiling group of friends and colleagues posing together at a party table" width="3200" height="1835" loading="lazy" decoding="async" style="object-position:50% 40%"></div>
     <div class="panel-text">
       <p class="label rv">Corporate</p>
       <h3 class="rv" style="--d:.1s">Corporate Parties</h3>
@@ -892,7 +876,7 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
   </article>
 
   <article class="panel">
-    <div class="photo parallax" data-key="service-2"><img class="px" src="assets/img/service-2.webp" srcset="assets/img/service-2-sm.webp 1600w, assets/img/service-2.webp 3200w" sizes="(max-width: 860px) 300vw, 120vw" alt="Guests at a black-tie award gala in a gold-lit ballroom with a stage and LED screen" width="3200" height="1835" loading="lazy" decoding="async" style="object-position:50% 35%"></div>
+    <div class="photo parallax" data-key="service-2"><img class="px" src="assets/img/service-2.webp" srcset="assets/img/service-2-sm.webp 1600w, assets/img/service-2.webp 3200w" sizes="(max-width: 860px) 300vw, 120vw" alt="Couple in a black saree and a blue kurta posing together at a party" width="3200" height="1835" loading="lazy" decoding="async" style="object-position:50% 35%"></div>
     <div class="panel-text">
       <p class="label rv">Galas</p>
       <h3 class="rv" style="--d:.1s">Award Nights and Galas</h3>
@@ -902,7 +886,7 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
   </article>
 
   <article class="panel">
-    <div class="photo parallax" data-key="service-3"><img class="px" src="assets/img/service-3.webp" srcset="assets/img/service-3-sm.webp 1600w, assets/img/service-3.webp 3160w" sizes="(max-width: 860px) 300vw, 120vw" alt="Team gathered around a bonfire on a hill-resort lawn at dusk, under festoon lights" width="3160" height="2294" loading="lazy" decoding="async" style="object-position:55% 40%"></div>
+    <div class="photo parallax" data-key="service-3"><img class="px" src="assets/img/service-3.webp" srcset="assets/img/service-3-sm.webp 1600w, assets/img/service-3.webp 3160w" sizes="(max-width: 860px) 300vw, 120vw" alt="Friends and colleagues posing together around restaurant tables at a night out" width="3160" height="2294" loading="lazy" decoding="async" style="object-position:55% 40%"></div>
     <div class="panel-text">
       <p class="label rv">Offsites</p>
       <h3 class="rv" style="--d:.1s">Team Offsites</h3>
@@ -912,7 +896,7 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
   </article>
 
   <article class="panel">
-    <div class="photo parallax" data-key="service-4"><img class="px" src="assets/img/service-4.webp" srcset="assets/img/service-4-sm.webp 1600w, assets/img/service-4.webp 3200w" sizes="(max-width: 860px) 300vw, 120vw" alt="Guests in Gatsby flapper dresses and suits dancing beside a champagne tower" width="3200" height="2289" loading="lazy" decoding="async" style="object-position:50% 45%"></div>
+    <div class="photo parallax" data-key="service-4"><img class="px" src="assets/img/service-4.webp" srcset="assets/img/service-4-sm.webp 1600w, assets/img/service-4.webp 3200w" sizes="(max-width: 860px) 300vw, 120vw" alt="Guests in feather headdresses and sequin outfits at a themed celebration" width="3200" height="2289" loading="lazy" decoding="async" style="object-position:50% 45%"></div>
     <div class="panel-text">
       <p class="label rv">Themed</p>
       <h3 class="rv" style="--d:.1s">Themed Celebrations</h3>
@@ -922,7 +906,7 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
   </article>
 
   <article class="panel">
-    <div class="photo parallax" data-key="service-5"><img class="px" src="assets/img/service-5.webp" srcset="assets/img/service-5-sm.webp 1600w, assets/img/service-5.webp 3200w" sizes="(max-width: 860px) 300vw, 120vw" alt="Friends cheering with sparkler bottle service in a club VIP section" width="3200" height="2129" loading="lazy" decoding="async" style="object-position:45% 40%"></div>
+    <div class="photo parallax" data-key="service-5"><img class="px" src="assets/img/service-5.webp" srcset="assets/img/service-5-sm.webp 1600w, assets/img/service-5.webp 3200w" sizes="(max-width: 860px) 300vw, 120vw" alt="Guests singing and filming beside the DJ booth at a club night" width="3200" height="2129" loading="lazy" decoding="async" style="object-position:45% 40%"></div>
     <div class="panel-text">
       <p class="label rv">Nightlife</p>
       <h3 class="rv" style="--d:.1s">Club Nights</h3>
@@ -1340,7 +1324,7 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
   <nav class="foot-links" aria-label="Footer">
     <a href="#services">Services</a>
     <a href="packages.html">Packages</a>
-    <a href="events.html">Events</a>
+    <a href="guestlist.html">Guest List</a>
     <a href="#about">About</a>
     <a href="#venues">Venues</a>
     <a href="#gallery">Gallery</a>
@@ -2326,8 +2310,5 @@ var yr=$('#year');if(yr)yr.textContent=new Date().getFullYear();
 hero();reveals();counters();venues();lightbox();moreGallery();book();enquiry();dj();mobileBar();videoCards();cursorGlow();
 })();
 </script>
-<!-- Next-event pop-up: always promotes the next upcoming night from events.html -->
-<script src="assets/js/home-live.js" defer></script>
-<script src="assets/js/popup.js" defer></script>
 </body>
 </html>
