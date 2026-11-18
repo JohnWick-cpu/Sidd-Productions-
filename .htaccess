@@ -36,6 +36,9 @@ DirectoryIndex index.html
 
 # The guest list page is now the Events page
 RewriteRule ^guestlist\.html$ https://siddproductions.com/events.html [L,R=301]
+# Short event links for social posts (temporary redirects, change per event)
+RewriteRule ^sherlock/?$ https://siddproductions.com/events.html?only=skydeck&utm_source=social&utm_medium=organic&utm_campaign=sherlock_night [L,R=302,NE]
+RewriteRule ^skydeck-night/?$ https://siddproductions.com/events.html?only=skydeck&utm_source=social&utm_medium=organic&utm_campaign=sherlock_night [L,R=302,NE]
 
 # Let listing portals pull event card images directly
 <IfModule mod_headers.c>
