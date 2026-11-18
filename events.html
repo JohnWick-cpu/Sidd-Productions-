@@ -1522,6 +1522,15 @@ function dow(isoS){return (parse(isoS).getUTCDay()+6)%7}
 function nice(isoS,long){var d=parse(isoS);return (long?DOW[dow(isoS)]:DOW[dow(isoS)].slice(0,3))+' '+d.getUTCDate()+' '+MON[d.getUTCMonth()]+(long?' '+d.getUTCFullYear():'')}
 function nextDates(w,n){var d=parse(TODAY),out=[];while(out.length<n){if((d.getUTCDay()+6)%7===w)out.push(iso(d));d=new Date(d.getTime()+864e5)}return out}
 var byId={};D.events.forEach(function(x){byId[x.id]=x});D.roof.forEach(function(x){x.rooftop=true;byId[x.id]=x});
+/* ?only=<id prefix> shows just those nights (used by ads, e.g. ?only=skydeck) */
+var ONLY=(new URLSearchParams(location.search).get('only')||'').toLowerCase().replace(/[^a-z0-9-]/g,'');
+if(ONLY){var keep=function(id){return (id||'').indexOf(ONLY)===0};
+  D.events=D.events.filter(function(x){return keep(x.id)});D.roof=[];
+  $$('.ev,.pc,.rf').forEach(function(c){if(!keep(c.getAttribute('data-id')))c.remove()});
+  ['#rooftop','#filters','#past'].forEach(function(q){var e=$(q);if(e)e.hidden=true});
+  $$('.jump a[href="#rooftop"]').forEach(function(e){e.remove()});
+  var all=document.createElement('a');all.className='chip';all.href='events.html';all.textContent='See all events';var j=$('.jump');if(j)j.appendChild(all);
+}
 
 /* split upcoming and earlier nights */
 var upcoming=D.events.filter(function(x){return x.date>=TODAY});
@@ -1740,7 +1749,7 @@ addEventListener('resize',frame);frame();
 <script>
 (function(){
   var END=new Date('2026-11-22T02:00:00+05:30'),K='sidd-sdp-seen',p=document.getElementById('sdp');
-  if(!p||new Date()>END)return;
+  if(!p||new Date()>END||/[?&]only=/.test(location.search))return;
   try{if(sessionStorage.getItem(K))return}catch(e){}
   function close(){p.classList.remove('on');setTimeout(function(){p.hidden=true},450);try{sessionStorage.setItem(K,'1')}catch(e){}}
   p.querySelector('.sdp-x').addEventListener('click',close);
