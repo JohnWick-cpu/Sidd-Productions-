@@ -34,6 +34,9 @@ RewriteRule ^ https://siddproductions.com%{REQUEST_URI} [L,R=301]
 
 DirectoryIndex index.html
 
+# The guest list page is now the Events page
+RewriteRule ^guestlist\.html$ https://siddproductions.com/events.html [L,R=301]
+
 # Let listing portals pull event card images directly
 <IfModule mod_headers.c>
   <FilesMatch "^district-.*\.jpg$">
