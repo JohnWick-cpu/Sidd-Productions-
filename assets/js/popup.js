@@ -55,6 +55,8 @@
     p.hidden=false;requestAnimationFrame(function(){requestAnimationFrame(function(){p.classList.add('on')})});
   }
 
+  /* ad landing views (?only=...) skip the pop-up */
+  if(/[?&]only=/.test(location.search))return;
   setTimeout(function(){
     getData().then(function(D){
       var next=(D.events||[]).filter(function(x){return x.date>=TODAY}).sort(function(a,b){return a.date<b.date?-1:a.date>b.date?1:0})[0];
