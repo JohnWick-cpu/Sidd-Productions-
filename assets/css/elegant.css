@@ -42,7 +42,9 @@ body::after{content:"";position:fixed;inset:-60px;z-index:9990;pointer-events:no
 .js h2.rv.in{clip-path:inset(-15% -10% -30% -10%)}
 
 /* light travelling across the gilded words */
-.hero h1 em,h2 em{background-image:linear-gradient(105deg,#8c6b22 0%,#d4af37 22%,#f6e7ad 38%,#d4af37 52%,#9c7a26 72%,#d4af37 100%);background-size:220% 100%;animation:gild 8s ease-in-out infinite}
+.closing>.wrap{position:relative;z-index:2}
+.closing p em{background:linear-gradient(105deg,#a8832a 0%,#f1d98a 38%,#d4af37 58%,#8c6b22 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em;margin-right:-.08em}
+.hero h1 em,h2 em,.closing p em{background-image:linear-gradient(105deg,#8c6b22 0%,#d4af37 22%,#f6e7ad 38%,#d4af37 52%,#9c7a26 72%,#d4af37 100%);background-size:220% 100%;animation:gild 8s ease-in-out infinite}
 @keyframes gild{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 
 /* reel interlude: three reels on a slow parallax, giant gold words drifting behind */
@@ -69,7 +71,49 @@ body::after{content:"";position:fixed;inset:-60px;z-index:9990;pointer-events:no
 
 @media (prefers-reduced-motion:reduce){
   .js h2.rv{clip-path:none}
-  .hero h1 em,h2 em,.film-marq,.film-dust i{animation:none}
+  .hero h1 em,h2 em,.closing p em,.film-marq,.film-dust i{animation:none}
   .film-dust{display:none}
   .film-orn path{stroke-dashoffset:0;transition:none}
+}
+
+/* ---------- motion, round two ---------- */
+/* scroll progress */
+.m-progress{position:fixed;left:0;top:0;width:100%;height:2px;z-index:9989;pointer-events:none;transform-origin:0 50%;transform:scaleX(var(--p,0));background:linear-gradient(90deg,#8c6b22,#f1d98a 60%,#d4af37);box-shadow:0 0 12px rgba(212,175,55,.6)}
+
+/* gold-edged curtain that sweeps off photos */
+.m-cur{position:absolute;inset:-1px;z-index:4;pointer-events:none;background:#000;transform-origin:100% 50%;transition:transform 1.5s var(--ease) var(--cd,0s)}
+.m-cur::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,#f1d98a,transparent);box-shadow:0 0 18px 2px rgba(212,175,55,.7)}
+.m-in>.m-cur{transform:scaleX(0)}
+
+/* gold ring drawn around each stat */
+.m-numwrap{position:relative;display:grid;place-items:center;padding:clamp(1.2rem,3vw,2.2rem)}
+.m-ring{position:absolute;left:50%;top:60%;height:142%;width:auto;aspect-ratio:1;overflow:visible;transform:translate(-50%,-50%) rotate(-90deg)}
+.m-ring circle{fill:none;stroke:url(#mGold);stroke-width:1;stroke-dasharray:603;stroke-dashoffset:603;transition:stroke-dashoffset 2.6s var(--ease) .2s}
+.m-ring circle+circle{stroke:rgba(212,175,55,.18);stroke-dasharray:2 7;stroke-dashoffset:0;transition:none;animation:ringTurn 40s linear infinite;transform-origin:50% 50%}
+.m-in .m-ring circle:first-of-type{stroke-dashoffset:0}
+@keyframes ringTurn{to{transform:rotate(360deg)}}
+
+/* section borders drawn from the centre */
+.m-line{position:absolute;left:0;right:0;top:-1px;height:1px;z-index:2;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(212,175,55,.75) 50%,transparent);transform:scaleX(0);transition:transform 1.8s var(--ease)}
+.m-in>.m-line{transform:scaleX(1)}
+
+/* magnetic buttons */
+.m-mag{transition:transform .6s var(--ease)}
+
+/* slow orbiting rings behind the closing call */
+.m-orbit{position:absolute;left:50%;top:50%;z-index:1;width:min(120vw,1100px);aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none}
+.m-orbit i{position:absolute;inset:calc(var(--k) * 9%);border-radius:50%;border:1px solid rgba(212,175,55,calc(.22 - var(--k) * .04));animation:orbit calc(50s + var(--k) * 25s) linear infinite}
+.m-orbit i:nth-child(2){border-style:dashed;animation-direction:reverse}
+.m-orbit i::before{content:"";position:absolute;left:50%;top:-3px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#f1d98a;box-shadow:0 0 14px 3px rgba(212,175,55,.7)}
+@keyframes orbit{to{transform:rotate(360deg)}}
+
+/* reels lean toward the cursor */
+.film-row{perspective:1200px}
+.film-reel{transform-style:preserve-3d}
+
+@media (prefers-reduced-motion:reduce){
+  .m-cur,.m-line,.m-progress{display:none}
+  .m-ring circle{transition:none;stroke-dashoffset:0}
+  .m-orbit i,.m-ring circle+circle{animation:none}
+  .m-mag{transition:none}
 }
