@@ -35,3 +35,41 @@ body::after{content:"";position:fixed;inset:-60px;z-index:9990;pointer-events:no
 
 @media (prefers-reduced-motion:reduce){body::after{animation:none}.g-item::before,.mm::before{transition:none}}
 @media print{body::after{display:none}}
+
+/* ---------- motion ---------- */
+/* headlines open like a curtain as they arrive */
+.js h2.rv{clip-path:inset(-15% -10% 105% -10%);transition:opacity 1.6s var(--ease) var(--d,0s),transform 1.6s var(--ease) var(--d,0s),clip-path 1.5s var(--ease) var(--d,0s)}
+.js h2.rv.in{clip-path:inset(-15% -10% -30% -10%)}
+
+/* light travelling across the gilded words */
+.hero h1 em,h2 em{background-image:linear-gradient(105deg,#8c6b22 0%,#d4af37 22%,#f6e7ad 38%,#d4af37 52%,#9c7a26 72%,#d4af37 100%);background-size:220% 100%;animation:gild 8s ease-in-out infinite}
+@keyframes gild{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* reel interlude: three reels on a slow parallax, giant gold words drifting behind */
+.film{position:relative;overflow:hidden;background:radial-gradient(80% 60% at 50% 40%,#140f05 0,#000 70%);padding-block:clamp(5rem,10vw,9rem)}
+.film-bg{position:absolute;inset:0;display:flex;align-items:center;pointer-events:none}
+.film-marq{display:flex;align-items:center;gap:3vw;white-space:nowrap;animation:filmMarq 60s linear infinite;will-change:transform}
+.film-marq span{font:italic 400 clamp(5rem,15vw,15rem)/1 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(212,175,55,.22)}
+.film-marq b{font-size:clamp(1.4rem,3vw,2.6rem);color:rgba(212,175,55,.3);font-weight:400}
+@keyframes filmMarq{to{transform:translateX(-50%)}}
+.film-dust i{position:absolute;bottom:-10px;left:calc(var(--x,50) * 1%);width:var(--s,3px);height:var(--s,3px);border-radius:50%;background:#f1d98a;box-shadow:0 0 10px 2px rgba(212,175,55,.55);opacity:0;animation:dust var(--t,14s) linear var(--w,0s) infinite}
+@keyframes dust{0%{transform:translateY(0);opacity:0}10%{opacity:.8}80%{opacity:.5}100%{transform:translateY(-110vh) translateX(30px);opacity:0}}
+.film-in{position:relative;z-index:1;text-align:center;display:grid;justify-items:center}
+.film-row{display:flex;justify-content:center;align-items:center;gap:clamp(.8rem,2.4vw,2rem);margin-bottom:clamp(2.6rem,5vw,4rem)}
+.film-reel{margin:0;width:clamp(120px,17vw,250px);aspect-ratio:9/16;overflow:hidden;border:1px solid rgba(212,175,55,.35);box-shadow:0 40px 90px rgba(0,0,0,.8),0 0 0 6px rgba(0,0,0,.6);will-change:transform;transition:border-color 1s}
+.film-reel.mid{width:clamp(150px,21vw,310px);border-color:rgba(212,175,55,.6)}
+.film-reel video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85) contrast(1.05)}
+.film-orn{width:min(240px,60vw);height:20px;margin-bottom:1.6rem;overflow:visible}
+.film-orn path{fill:none;stroke:var(--gold);stroke-width:1;stroke-dasharray:120;stroke-dashoffset:120;transition:stroke-dashoffset 2.2s var(--ease)}
+.film-orn.in path{stroke-dashoffset:0}
+.film-orn path:nth-child(2){transition-delay:.5s}
+.film-h{font:400 clamp(2.4rem,5.6vw,4.6rem)/1.08 var(--serif);color:#fff;margin:0 0 1rem}
+.film-sub{color:var(--text);margin:0 0 1.6rem;max-width:34rem}
+@media (max-width:640px){.film-reel{width:25vw}.film-reel.mid{width:31vw}.film-row{gap:.5rem}}
+
+@media (prefers-reduced-motion:reduce){
+  .js h2.rv{clip-path:none}
+  .hero h1 em,h2 em,.film-marq,.film-dust i{animation:none}
+  .film-dust{display:none}
+  .film-orn path{stroke-dashoffset:0;transition:none}
+}
