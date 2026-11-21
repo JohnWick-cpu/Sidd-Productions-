@@ -57,6 +57,11 @@
   "@type": "Person",
   "name": "Bikash Sunarr"
  },
+ "offers": [
+  {"@type": "Offer", "name": "Ticket", "price": "999", "priceCurrency": "INR", "url": "https://siddproductions.com/skydeck-mg-road.html", "availability": "https://schema.org/InStock"},
+  {"@type": "Offer", "name": "Early bird (first 100 tickets)", "price": "499", "priceCurrency": "INR", "url": "https://siddproductions.com/skydeck-mg-road.html", "availability": "https://schema.org/LimitedAvailability"}
+ ],
+ "typicalAgeRange": "21-",
  "organizer": {
   "@type": "Organization",
   "name": "Sidd Productions",
@@ -767,6 +772,7 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.86);-webkit-backdrop-filter:blur(6
 .promo-body h2{font:400 clamp(2rem,4.2vw,3.4rem)/1.1 var(--serif);color:#fff;margin:0}
 .promo-body h2 em{color:var(--gold)}
 .promo-body p{color:var(--text);max-width:30rem;margin:0}
+.promo-body .promo-price{color:var(--gold);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase}
 .promo-wide{width:100%;height:auto;display:block;border:1px solid rgba(255,255,255,.08);margin:.4rem 0}
 @media (max-width:860px){.promo{grid-template-columns:1fr}.promo-reel{width:min(100%,340px);margin-inline:auto}}
 </style>
@@ -834,6 +840,10 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.86);-webkit-backdrop-filter:blur(6
         <li><span>Time</span><b id="feat-time">7 PM onwards</b></li>
         <li><span>Line-up</span><b id="feat-who">Bikash Sunarr</b></li>
         <li><span>Venue</span><b>SkyDeck by Sherlock&#x27;s, MG Road</b></li>
+        <li><span>Tickets</span><b>&#8377;999</b></li>
+        <li><span>Early bird</span><b>&#8377;499, first 100 tickets</b></li>
+        <li><span>Entry</span><b>21+ only, government photo ID</b></li>
+        <li><span>Dress code</span><b>Smart casuals</b></li>
       </ul>
       <div class="acts">
         <button class="btn btn--solid" type="button" id="feat-book" data-book="sufi-night">Get on the list</button>
@@ -852,7 +862,8 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.86);-webkit-backdrop-filter:blur(6
     <div class="promo-body rv" style="--d:.1s">
       <p class="label">Watch the promo</p>
       <h2 id="promo-h">An evening of <em>Sufi</em>, live.</h2>
-      <p>Bikash Sunarr live on SkyDeck by Sherlock&#x27;s, MG Road. Saturday 5 December, 7 PM onwards.</p>
+      <p>Bikash Sunarr live on SkyDeck by Sherlock&#x27;s, MG Road. Saturday 5 December, gates open 7 PM.</p>
+      <p class="promo-price">Tickets &#8377;999 &middot; Early bird &#8377;499 for the first 100</p>
       <img class="promo-wide" src="assets/img/skydeck-mg/sufi-night-wide-sm.webp?v=5481edde" srcset="assets/img/skydeck-mg/sufi-night-wide-sm.webp?v=5481edde 960w, assets/img/skydeck-mg/sufi-night-wide.webp?v=31f8f72b 1920w" sizes="(max-width: 860px) 100vw, 50vw" alt="Sufi Night with Bikash Sunarr banner" width="1920" height="960" loading="lazy" decoding="async">
       <div class="acts"><button class="btn btn--solid" type="button" data-book="sufi-night">Get on the list</button></div>
     </div>
@@ -905,7 +916,7 @@ dialog.sheet::backdrop{background:rgba(0,0,0,.86);-webkit-backdrop-filter:blur(6
   </div>
   <div class="wrap">
     <ol class="steps rv"><li class="step"><h3>Tap Get on the list</h3><p>Use the button next to the Sufi Night poster.</p></li><li class="step"><h3>Tell us who is coming</h3><p>Add your name, your number and your group: how many male, female and couples. Mention a table if you want one.</p></li><li class="step"><h3>Send it on WhatsApp</h3><p>Your request opens as a ready-to-send WhatsApp message to Sidd Productions.</p></li><li class="step"><h3>Get confirmed</h3><p>We confirm your entry by message. Keep the confirmation handy at the door.</p></li></ol>
-    <dl class="know rv"><div><dt>ID</dt><dd>Carry a valid photo ID.</dd></div><div><dt>Venue</dt><dd>SkyDeck by Sherlock&#x27;s, MG Road, Bengaluru.</dd></div><div><dt>Start time</dt><dd>7 PM onwards on Saturday 5 December.</dd></div><div><dt>Tables</dt><dd>Tick the table box in your request and we will share the options on WhatsApp.</dd></div><div><dt>Confirmation</dt><dd>A request is not an entry until we confirm it by message.</dd></div></dl>
+    <dl class="know rv"><div><dt>Tickets</dt><dd>&#8377;999. Early bird: 50% off at &#8377;499, for the first 100 tickets only.</dd></div><div><dt>Age</dt><dd>21 and above only. Carry a valid government photo ID for age verification.</dd></div><div><dt>Dress code</dt><dd>Smart casuals.</dd></div><div><dt>Venue</dt><dd>SkyDeck by Sherlock&#x27;s, MG Road, Bengaluru.</dd></div><div><dt>Start time</dt><dd>Gates open at 7 PM on Saturday 5 December.</dd></div><div><dt>Tables</dt><dd>Tick the table box in your request and we will share the options on WhatsApp.</dd></div><div><dt>Confirmation</dt><dd>A request is not an entry until we confirm it by message.</dd></div></dl>
   </div>
 </section>
 
@@ -1102,12 +1113,12 @@ function message(r){
 function waLink(r){return WA+'?text='+encodeURIComponent(message(r))}
 function startStr(r){var x=byId[r.id];return r.date.replace(/-/g,'')+'T'+(x.start||'20:00').replace(':','')+'00'}
 function endStr(r){var x=byId[r.id],d=parse(r.date);var h=x.end?x.end:'00:00';d=new Date(d.getTime()+864e5);return iso(d).replace(/-/g,'')+'T'+h.replace(':','')+'00'}
-function gcal(r){var x=byId[r.id];return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(x.title+' at '+D.venue)+'&dates='+startStr(r)+'/'+endStr(r)+'&ctz=Asia/Kolkata&location='+encodeURIComponent(D.venue+', Bengaluru')+'&details='+encodeURIComponent('Guest list request for '+r.guests+' sent to Sidd Productions on WhatsApp. Entry is confirmed by message.')}
+function gcal(r){var x=byId[r.id];return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(x.title+' at '+D.venue)+'&dates='+startStr(r)+'/'+endStr(r)+'&ctz=Asia/Kolkata&location='+encodeURIComponent(D.venue+', Bengaluru')+'&details='+encodeURIComponent('Guest list request for '+r.guests+' sent to Sidd Productions on WhatsApp. Entry is confirmed by message. 21+ only, carry a government photo ID.')}
 function ics(r){
   var x=byId[r.id],esc=function(s){return s.replace(/([,;\\])/g,'\\$1')};
   var body=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Sidd Productions//Guest list//EN','BEGIN:VEVENT','UID:'+r.id+'-'+r.date+'@siddproductions.com',
     'DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z','DTSTART;TZID=Asia/Kolkata:'+startStr(r),'DTEND;TZID=Asia/Kolkata:'+endStr(r),
-    'SUMMARY:'+esc(x.title+' at '+D.venue),'LOCATION:'+esc(D.venue+', Bengaluru'),'DESCRIPTION:'+esc('Guest list request for '+r.guests+'. Entry is confirmed by message.'),'END:VEVENT','END:VCALENDAR'].join('\r\n');
+    'SUMMARY:'+esc(x.title+' at '+D.venue),'LOCATION:'+esc(D.venue+', Bengaluru'),'DESCRIPTION:'+esc('Guest list request for '+r.guests+'. Entry is confirmed by message. 21+ only, carry a government photo ID.'),'END:VEVENT','END:VCALENDAR'].join('\r\n');
   var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([body],{type:'text/calendar'}));a.download=x.title.replace(/[^A-Za-z0-9]+/g,'-')+'.ics';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
 }
 form.addEventListener('submit',function(ev){
