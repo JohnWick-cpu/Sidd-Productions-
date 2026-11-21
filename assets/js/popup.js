@@ -42,7 +42,7 @@
     var cta=ON_EVENTS?'<button class="sdp-cta" type="button" data-book="'+esc(x.id)+'">Get on the list</button>':'<a class="sdp-cta" href="'+href+'">Get on the list</a>';
     var p=document.createElement('div');p.className='sdp';p.id='sdp';p.setAttribute('role','dialog');p.setAttribute('aria-modal','false');p.setAttribute('aria-labelledby','sdp-t');p.hidden=true;
     p.innerHTML='<button class="sdp-x" type="button" aria-label="Close">&times;</button>'+
-      art+'<img src="assets/img/events/'+esc(x.id)+'-sm.webp" alt="'+esc(x.alt||('Poster for '+x.title))+'" width="540" height="720" decoding="async">'+(ON_EVENTS?'</button>':'</a>')+
+      art+'<img src="'+esc(x.img||('assets/img/events/'+x.id+'-sm.webp'))+'" alt="'+esc(x.alt||('Poster for '+x.title))+'" width="540" height="720" decoding="async">'+(ON_EVENTS?'</button>':'</a>')+
       '<div class="sdp-b"><p class="sdp-l">'+(x.date===TODAY?'Tonight':'Next up')+' &middot; Sidd Productions</p>'+
       '<p class="sdp-t" id="sdp-t">'+esc(x.title)+'</p>'+
       '<p class="sdp-m">'+nice(x.date)+' &middot; '+esc(x.time)+(x.who?'<br>'+esc(x.who):'')+'</p>'+cta+'</div>';
