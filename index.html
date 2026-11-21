@@ -810,20 +810,22 @@ html.menu-open .mbar,html.lb-open .mbar{display:none}
 .hr-frame.is-paused .hr-play{width:56px;height:56px;right:50%;bottom:50%;transform:translate(50%,50%);border-color:var(--gold);color:var(--gold)}
 @media (max-width:640px){.hr-row{grid-auto-columns:46vw}.hr-nav{display:none}}
 </style>
-<style>/* home reel strip: reels side by side, gliding sideways */
-.hreels.fx{padding:0;overflow:clip}
-.hreels.fx>.wrap{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:clip;max-width:none;padding-inline:0}
+<style>/* home reel strip: a carousel that turns by itself; two reels face you, the rest wait behind in shadow */
+.hreels.fx{overflow:clip;padding-block:clamp(2rem,5vw,3.5rem)}
+.hreels.fx>.wrap{position:relative;max-width:none;padding-inline:0}
+.hreels.fx{--cw:min(calc(58vh * 9 / 16),calc((100vw - 3rem) / 2),300px)}
 .hreels.fx .hr-top{width:calc(var(--cw) * 2 + 1rem);margin-inline:auto}
-.hreels.fx{--cw:min(calc(64vh * 9 / 16),calc((100vw - 3rem) / 2))}
 .hreels.fx .hr-nav{display:none}
 .hreels.fx .hr-row{display:none}
-.hr-3d{position:relative;margin-top:7vh;height:calc(var(--cw) * 16 / 9);perspective:1400px}
-.hr-strip{position:absolute;left:0;top:0;display:flex;gap:1rem;transform-style:preserve-3d;will-change:transform}
-.hr-strip .hr-card{width:var(--cw);flex:none;transform-origin:50% 50%;will-change:transform}
-.hr-strip .hr-frame{box-shadow:0 30px 80px rgba(0,0,0,.75)}
-.hr-count{margin-top:1rem;text-align:center;font-size:.7rem;letter-spacing:.2em;color:var(--gold)}
+.hr-3d{position:relative;margin-top:clamp(1.4rem,4vh,2.6rem);height:calc(var(--cw) * 16 / 9)}
+.hr-ring{position:absolute;left:50%;top:0;width:0;height:100%}
+.hr-ring .hr-card{position:absolute;left:0;top:0;width:var(--cw);will-change:transform,filter}
+.hr-ring .hr-frame{box-shadow:0 30px 80px rgba(0,0,0,.8)}
+.hr-ring .hr-card.back{cursor:pointer}
+.hr-ring .hr-card.back .hr-play,.hr-ring .hr-card.back .hr-snd{visibility:hidden}
+.hr-count{margin-top:1.2rem;text-align:center;font-size:.7rem;letter-spacing:.2em;color:var(--gold)}
 .hr-amb{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.hr-amb i{position:absolute;inset:-12%;display:grid;opacity:0;transition:opacity 1.1s ease;filter:blur(46px) saturate(1.35) brightness(.5);transform:scale(1.15)}
+.hr-amb i{position:absolute;inset:-12%;display:grid;grid-template-columns:1fr 1fr;opacity:0;transition:opacity 1.4s ease;filter:blur(46px) saturate(1.35) brightness(.5);transform:scale(1.15)}
 .hr-amb i b{background-size:cover;background-position:center}
 .hr-amb i.on{opacity:1}
 .hr-amb::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 45%,transparent,rgba(0,0,0,.75) 75%),linear-gradient(180deg,rgba(0,0,0,.55),transparent 25%,transparent 75%,#000)}
@@ -2419,47 +2421,50 @@ hero();reveals();counters();venues();lightbox();moreGallery();book();enquiry();d
 </script>
 
 <script>
-/* home reel strip: pinned; the reels sit side by side and glide sideways as the page scrolls, each one pausing at the centre. Off for reduced motion. */
+/* home reel strip: a carousel that turns left by itself. Two reels face you and play for a while, the rest wait behind in shadow, then the ring turns to the next two. Pauses on hover, off screen and in a hidden tab; a reel behind can be clicked to bring it round. Off for reduced motion. */
 (function(){
   var box=document.getElementById('hreels');if(!box)return;
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   var row=box.querySelector('.hr-row'),cards=[].slice.call(box.querySelectorAll('.hr-card'));
-  function clamp(x){return x<0?0:x>1?1:x}
-  function vh(){return window.innerHeight||800}
-  var raf=0;function kick(){if(!raf)raf=requestAnimationFrame(function(){raf=0;draw()})}
-  window.addEventListener('scroll',kick,{passive:true});window.addEventListener('resize',function(){layout();kick()},{passive:true});
-
   box.classList.add('fx');
   var w=box.querySelector('.wrap'),stage=document.createElement('div');stage.className='hr-3d';row.parentNode.insertBefore(stage,row.nextSibling);
-  var strip=document.createElement('div');strip.className='hr-strip';stage.appendChild(strip);
-  cards.forEach(function(c){strip.appendChild(c)});
+  var ring=document.createElement('div');ring.className='hr-ring';stage.appendChild(ring);
+  cards.forEach(function(c){ring.appendChild(c)});
   var cnt=document.createElement('p');cnt.className='hr-count';stage.parentNode.insertBefore(cnt,stage.nextSibling);
+  var n=cards.length,pairs=Math.ceil(n/2),STEP=2*Math.PI/n,HOLD=5200,TURN=1500;
   var amb=document.createElement('div');amb.className='hr-amb';amb.setAttribute('aria-hidden','true');w.insertBefore(amb,w.firstChild);
-  var ambs=cards.map(function(c){var i=document.createElement('i'),b=document.createElement('b'),u=c.querySelector('video').getAttribute('poster');if(u)b.style.backgroundImage='url("'+u+'")';i.appendChild(b);amb.appendChild(i);return i});
-  var n=cards.length,front=-1,step;
-  function layout(){box.style.height=(vh()*(1+.42*(n-1)))+'px'}
+  var ambs=[];for(var j=0;j<pairs;j++){var e=document.createElement('i');[cards[2*j],cards[2*j+1]].forEach(function(c){if(!c)return;var b=document.createElement('b'),u=c.querySelector('video').getAttribute('poster');if(u)b.style.backgroundImage='url("'+u+'")';e.appendChild(b)});amb.appendChild(e);ambs.push(e)}
+  var rot=0,from=0,to=0,t0=0,pair=0,hold=0,hover=false,seen=false,last=0,raf=0;
   function ease(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}
-  function setFront(f){if(f===front)return;front=f;ambs.forEach(function(e,i){e.classList.toggle('on',i===f)})}
-  function draw(){
-    var r=box.getBoundingClientRect(),span=r.height-vh(),p=span>0?clamp(-r.top/span):0,f=p*(n-1),i=Math.floor(f),fr=f-i;
-    var hold=.3,pos=Math.min(n-1,i+(fr<hold?0:ease((fr-hold)/(1-hold))));
-    step=cards[0].offsetWidth+(parseFloat(getComputedStyle(strip).columnGap)||16);
-    var cw=cards[0].offsetWidth,sx=stage.getBoundingClientRect().left;
-    strip.style.transform='translate3d('+(innerWidth/2-sx-pos*step-cw/2).toFixed(1)+'px,0,0)';
-    var seen=r.top<vh()&&r.bottom>0;
+  function place(){
+    var cw=cards[0].offsetWidth,R=(cw+16)/2/Math.sin(STEP/2),front=[];
     cards.forEach(function(c,k){
-      var d=k-pos,a=Math.abs(d),ry=Math.max(-28,Math.min(28,-d*14)),sc=1-Math.min(.16,a*.07);
-      c.style.transform='rotateY('+ry.toFixed(2)+'deg) scale('+sc.toFixed(3)+')';
-      c.style.filter='brightness('+(1-Math.min(.55,a*.22)).toFixed(3)+')';
-      c.style.zIndex=String(100-Math.round(a*10));
-      var on=a<1.01,v=c.querySelector('video');
-      if(on)delete c.dataset.off;else c.dataset.off='1';
-      if(seen&&on){if(!v.src)v.src=v.getAttribute('data-src');if(v.paused)v.play().catch(function(){})}else if(!v.paused)v.pause();
+      var th=(k+.5)*STEP-rot,s=Math.sin(th),co=Math.cos(th),depth=(1+co)/2;
+      var sc=.45+.55*Math.pow(depth,2),x=R*s*(.62+.38*depth),y=(1-depth)*-cw*.18;
+      c.style.transform='translate3d('+(x-cw/2).toFixed(1)+'px,'+y.toFixed(1)+'px,0) scale('+sc.toFixed(3)+')';
+      var dk=Math.pow(depth,5);c.style.filter='brightness('+(.12+.88*dk).toFixed(3)+') saturate('+(.5+.5*dk).toFixed(3)+')';
+      c.style.zIndex=String(Math.round(depth*100));
+      var isFront=co>Math.cos(STEP*1.01);c.classList.toggle('back',!isFront);
+      if(isFront)delete c.dataset.off;else c.dataset.off='1';
+      var v=c.querySelector('video');
+      if(seen&&isFront&&!turning()){if(!v.src)v.src=v.getAttribute('data-src');if(v.paused&&!c.dataset.manual)v.play().catch(function(){})}
+      else if(!isFront&&!v.paused)v.pause();
     });
-    cnt.textContent=(Math.min(n,Math.round(pos)+1))+' / '+n;
-    if(seen)setFront(Math.round(pos));
   }
-  layout();draw();
+  function turning(){return to!==rot}
+  function go(p){p=((p%pairs)+pairs)%pairs;var d=p-pair;if(d<0)d+=pairs;if(!d)return;from=rot;to=rot+d*2*STEP;t0=0;pair=p;
+    ambs.forEach(function(e,i){e.classList.toggle('on',i===p)});cnt.textContent=(p+1)+' / '+pairs;kick()}
+  function frame(ts){raf=0;var dt=last?Math.min(100,ts-last):0;last=ts;
+    if(turning()){if(!t0)t0=ts;var q=Math.min(1,(ts-t0)/TURN);rot=from+(to-from)*ease(q);if(q>=1){rot=to;hold=0}}
+    else if(seen&&!hover&&!document.hidden){hold+=dt;if(hold>=HOLD)go(pair+1)}
+    place();if(seen)kick();else last=0}
+  function kick(){if(!raf)raf=requestAnimationFrame(frame)}
+  cards.forEach(function(c,k){c.addEventListener('click',function(e){if(c.classList.contains('back')){e.preventDefault();e.stopPropagation();go(Math.floor(k/2))}},true);
+    c.querySelector('.hr-play').addEventListener('click',function(){var v=c.querySelector('video');if(v.paused)c.dataset.manual='1';else delete c.dataset.manual})});
+  stage.addEventListener('mouseenter',function(){hover=true});stage.addEventListener('mouseleave',function(){hover=false});
+  if('IntersectionObserver' in window)new IntersectionObserver(function(en){seen=en[0].isIntersecting;last=0;if(seen)kick();else place()},{threshold:.25}).observe(stage);else seen=true;
+  window.addEventListener('resize',function(){place()},{passive:true});
+  ambs[0]&&ambs[0].classList.add('on');cnt.textContent='1 / '+pairs;place();kick();
 })();
 </script>
 </body>
